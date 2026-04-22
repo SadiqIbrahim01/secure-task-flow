@@ -1,0 +1,107 @@
+HELP.md
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# ===========================
+# Maven
+# ===========================
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# ===========================
+# IntelliJ IDEA
+# ===========================
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+.idea_modules/
+
+# ===========================
+# VS Code
+# ===========================
+.vscode/
+*.code-workspace
+
+# ===========================
+# Eclipse
+# ===========================
+.eclipse/
+.classpath
+.project
+.settings/
+bin/
+
+# ===========================
+# macOS
+# ===========================
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# ===========================
+# Windows
+# ===========================
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ===========================
+# Linux
+# ===========================
+*~
+
+# ===========================
+# CRITICAL: Environment & Secrets
+# NEVER commit these files
+# ===========================
+.env
+.env.*
+!.env.example
+application-local.yml
+application-prod.yml
+application-staging.yml
+secrets.yml
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+
+# ===========================
+# Logs
+# ===========================
+logs/
+*.log
+*.log.*
+spring.log
+
+# ===========================
+# Test Reports & Coverage
+# ===========================
+/test-results/
+/coverage/
+*.exec
+
+# ===========================
+# Docker (for future use)
+# ===========================
+.docker/
+
+# ===========================
+# OS & Misc
+# ===========================
+*.swp
+*.swo
+*.tmp
+*.bak
+*.orig

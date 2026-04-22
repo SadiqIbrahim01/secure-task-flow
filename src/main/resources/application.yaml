@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: securetaskflow
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+      idle-timeout: 600000
+
+  jpa:
+    hibernate:
+      ddl-auto: validate      # NEVER 'create' or 'update' in production
+    show-sql: false           # true only in dev — logs all SQL
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+server:
+  port: ${APP_PORT:8080}
+  error:
+    include-stacktrace: never   # CRITICAL — never expose stack traces
+    include-message: never      # We control error messages via RFC 7807
+
+application:
+  jwt:
+    secret: ${JWT_SECRET}
+    access-token-expiry-ms: ${JWT_ACCESS_EXPIRY_MS:900000}
+    refresh-token-expiry-ms: ${JWT_REFRESH_EXPIRY_MS:604800000}
+  security:
+    max-login-attempts: ${MAX_LOGIN_ATTEMPTS:5}
+    lockout-duration-minutes: ${LOCKOUT_DURATION_MINUTES:15}
