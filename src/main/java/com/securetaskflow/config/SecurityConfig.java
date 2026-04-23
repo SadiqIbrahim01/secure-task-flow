@@ -1,5 +1,11 @@
 package com.securetaskflow.config;
 
+import org.springframework.security.web.AuthenticationEntryPoint;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.net.URI;
+import java.time.Instant;
 import com.securetaskflow.security.CustomUserDetailsService;
 import com.securetaskflow.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
@@ -58,6 +64,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/admin/**").hasRole("SUPER_ADMIN")
                         .anyRequest().authenticated()
                 )
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(authenticationEntryPoint(new ObjectMapper()))
+                )
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class);
@@ -81,5 +90,25 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
+    }
+
+    @Bean
+    public AuthenticationEntryPoint authenticationEntryPoint(ObjectMapper objectMapper) {
+        return (request, response, authException) -> {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401
+            response.setContentType("application/problem+json");     // RFC 7807
+            response.setHeader("WWW-Authenticate", "Bearer realm=\"securetaskflow\"");
+
+            var problem = java.util.Map.of(
+                    "type",      "https://securetaskflow.com/errors/unauthorized",
+                    "title",     "Unauthorized",
+                    "status",    401,
+                    "detail",    "Authentication required. Provide a valid Bearer token.",
+                    "instance",  request.getRequestURI(),
+                    "timestamp", Instant.now().toString()
+            );
+
+            objectMapper.writeValue(response.getWriter(), problem);
+        };
     }
 }

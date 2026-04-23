@@ -36,9 +36,9 @@ server:
 
 application:
   jwt:
-    secret: ${JWT_SECRET}
+    secret: hSZYnCto8CwuUCz7zPy2LytYyqSEqj7hRlVS6EYzWRE=
     access-token-expiry-ms: ${JWT_ACCESS_EXPIRY_MS:900000}
     refresh-token-expiry-ms: ${JWT_REFRESH_EXPIRY_MS:604800000}
   security:
-    max-login-attempts: ${MAX_LOGIN_ATTEMPTS:5}
+    max-login-attempts: 5
     lockout-duration-minutes: ${LOCKOUT_DURATION_MINUTES:15}
