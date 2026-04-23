@@ -72,7 +72,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoResourceFoundException.class)
     public ProblemDetail handleNoResourceFound(NoResourceFoundException ex,
                                                HttpServletRequest request) {
-        return buildProblem(HttpStatus.NOT_FOUND, "Not Found",
+        log.debug("No endpoint found: {}", request.getRequestURI());
+        return buildProblem(HttpStatus.NOT_FOUND,
+                "Not Found",
                 "The requested endpoint does not exist",
                 request.getRequestURI());
     }
@@ -80,9 +82,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ProblemDetail handleMethodNotSupported(HttpRequestMethodNotSupportedException ex,
                                                   HttpServletRequest request) {
-        return buildProblem(HttpStatus.METHOD_NOT_ALLOWED, "Method Not Allowed",
+        ProblemDetail problem = buildProblem(HttpStatus.METHOD_NOT_ALLOWED,
+                "Method Not Allowed",
                 "HTTP method '" + ex.getMethod() + "' is not supported for this endpoint",
                 request.getRequestURI());
+        problem.setProperty("supportedMethods", ex.getSupportedMethods());
+        return problem;
     }
 
     private ProblemDetail buildProblem(HttpStatus status, String title,

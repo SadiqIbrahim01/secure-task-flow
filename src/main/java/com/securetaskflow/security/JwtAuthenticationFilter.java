@@ -32,7 +32,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
 
         final String path = request.getServletPath();
-        if (path.startsWith("/api/v1/auth/")) {
+        if (isPublicEndpoint(path, request.getMethod())) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -72,4 +72,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
+    private boolean isPublicEndpoint(String path, String method) {
+        return (path.equals("/api/v1/auth/register") && method.equals("POST"))
+                || (path.equals("/api/v1/auth/login")    && method.equals("POST"))
+                || (path.equals("/api/v1/auth/refresh")  && method.equals("POST"));
+        }
 }
