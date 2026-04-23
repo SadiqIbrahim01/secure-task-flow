@@ -6,8 +6,10 @@ import org.springframework.http.*;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.net.URI;
 import java.time.Instant;
@@ -64,6 +66,22 @@ public class GlobalExceptionHandler {
         log.error("Unhandled exception at {}: {}", request.getRequestURI(), ex.getMessage(), ex);
         return buildProblem(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error",
                 "An unexpected error occurred. Please try again later.",
+                request.getRequestURI());
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ProblemDetail handleNoResourceFound(NoResourceFoundException ex,
+                                               HttpServletRequest request) {
+        return buildProblem(HttpStatus.NOT_FOUND, "Not Found",
+                "The requested endpoint does not exist",
+                request.getRequestURI());
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ProblemDetail handleMethodNotSupported(HttpRequestMethodNotSupportedException ex,
+                                                  HttpServletRequest request) {
+        return buildProblem(HttpStatus.METHOD_NOT_ALLOWED, "Method Not Allowed",
+                "HTTP method '" + ex.getMethod() + "' is not supported for this endpoint",
                 request.getRequestURI());
     }
 
