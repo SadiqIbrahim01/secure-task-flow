@@ -3,9 +3,9 @@ spring:
     name: securetaskflow
 
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://localhost:5433/securetaskflow
+    username: postgres
+    password: Password123
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 10
@@ -14,21 +14,22 @@ spring:
       idle-timeout: 600000
 
   jpa:
+    open-in-view: false
     hibernate:
-      ddl-auto: validate      # NEVER 'create' or 'update' in production
+      ddl-auto: validate    # NEVER 'create' or 'update' in production
     show-sql: false           # true only in dev — logs all SQL
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
 
   flyway:
     enabled: true
     locations: classpath:db/migration
     baseline-on-migrate: true
+    baseline-version: 8
 
 server:
-  port: ${APP_PORT:8080}
+  port: 8080
   error:
     include-stacktrace: never   # CRITICAL — never expose stack traces
     include-message: never      # We control error messages via RFC 7807
