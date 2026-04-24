@@ -11,7 +11,11 @@ import java.util.UUID;
 
 public interface ProjectRepository extends JpaRepository<Project, UUID> {
 
-    Optional<Project> findByIdAndOrganizationId(UUID id, UUID orgId);
+    @Query("SELECT p FROM Project p WHERE p.id = :id AND p.organization.id = :orgId")
+    Optional<Project> findByIdAndOrganizationId(
+            @Param("id") UUID id,
+            @Param("orgId") UUID orgId
+    );
 
     @Query("""
         SELECT p FROM Project p

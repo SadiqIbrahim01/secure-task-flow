@@ -32,18 +32,20 @@ public class ProjectMembership extends BaseEntity {
     private ProjectRole role;
 
     public enum ProjectRole {
-        PROJECT_OWNER, PROJECT_MEMBER, PROJECT_VIEWER;
-    }
+        PROJECT_OWNER,
+        PROJECT_MEMBER,
+        PROJECT_VIEWER;
 
-    public boolean canEdit() {
-        return role == ProjectRole.PROJECT_OWNER || role == ProjectRole.PROJECT_MEMBER;
-    }
+        public boolean canManageMembers() {
+            return this == PROJECT_OWNER;
+        }
 
-    public boolean canDelete() {
-        return role == ProjectRole.PROJECT_OWNER;
-    }
+        public boolean canDelete() {
+            return this == PROJECT_OWNER;
+        }
 
-    public boolean canManageMembers() {
-        return role == ProjectRole.PROJECT_OWNER;
+        public boolean canEdit() {
+            return this == PROJECT_OWNER || this == PROJECT_MEMBER;
+        }
     }
 }

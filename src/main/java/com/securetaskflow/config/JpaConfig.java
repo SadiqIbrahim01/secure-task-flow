@@ -2,8 +2,10 @@ package com.securetaskflow.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import static org.springframework.data.web.config.EnableSpringDataWebSupport.PageSerializationMode.VIA_DTO;
 
 @Configuration
 @EnableJpaAuditing
-public class JpaConfig {
-}
+@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)
+public class JpaConfig {}
