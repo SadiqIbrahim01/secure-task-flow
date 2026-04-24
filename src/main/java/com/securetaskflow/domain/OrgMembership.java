@@ -33,5 +33,9 @@ public class OrgMembership extends BaseEntity {
 
     public enum OrgRole {
         ORG_OWNER, ORG_MEMBER;
+
+        public boolean canManageMembers() {
+            return this == ORG_OWNER;
+        }
     }
 }
