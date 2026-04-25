@@ -54,7 +54,7 @@ public class ProjectService {
                 .build();
         projectMembershipRepository.save(membership);
 
-        auditService.log(actorId, null, "PROJECT_CREATED",
+        auditService.log(actorId,"PROJECT_CREATED",
                 "Project", project.getId(), null, project.getName(), null);
 
         return toResponse(project);
@@ -124,7 +124,7 @@ public class ProjectService {
 
         projectMembershipRepository.save(membership);
 
-        auditService.log(actorId, null, "PROJECT_MEMBER_ADDED",
+        auditService.log(actorId,"PROJECT_MEMBER_ADDED",
                 "Project", projectId, null, newMember.getEmail(), null);
 
         return MemberResponse.builder()
@@ -153,7 +153,7 @@ public class ProjectService {
 
         projectRepository.delete(project);
 
-        auditService.log(actorId, null, "PROJECT_DELETED",
+        auditService.log(actorId,"PROJECT_DELETED",
                 "Project", projectId, project.getName(), null, null);
     }
 

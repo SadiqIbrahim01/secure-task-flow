@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -95,6 +97,18 @@ public class GlobalExceptionHandler {
                                                HttpServletRequest request) {
         return buildProblem(HttpStatus.BAD_REQUEST, "Invalid Request",
                 ex.getMessage(), request.getRequestURI());
+    }
+
+    @ExceptionHandler(DisabledException.class)
+    public ProblemDetail handleDisabled(HttpServletRequest request) {
+        return buildProblem(HttpStatus.UNAUTHORIZED, "Authentication Failed",
+                "Invalid credentials", request.getRequestURI());
+    }
+
+    @ExceptionHandler(LockedException.class)
+    public ProblemDetail handleLocked(HttpServletRequest request) {
+        return buildProblem(HttpStatus.UNAUTHORIZED, "Authentication Failed",
+                "Invalid credentials", request.getRequestURI());
     }
 
     private ProblemDetail buildProblem(HttpStatus status, String title,

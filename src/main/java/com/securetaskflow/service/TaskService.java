@@ -60,7 +60,7 @@ public class TaskService {
 
         task = taskRepository.save(task);
 
-        auditService.log(actorId, null, "TASK_CREATED",
+        auditService.log(actorId,"TASK_CREATED",
                 "Task", task.getId(), null, task.getTitle(), null);
 
         return toResponse(task);
@@ -117,7 +117,7 @@ public class TaskService {
 
         task = taskRepository.save(task);
 
-        auditService.log(actorId, null, "TASK_UPDATED",
+        auditService.log(actorId,"TASK_UPDATED",
                 "Task", taskId, oldTitle, task.getTitle(), null);
 
         return toResponse(task);
@@ -146,7 +146,7 @@ public class TaskService {
         task.setStatus(request.getStatus());
         task = taskRepository.save(task);
 
-        auditService.log(actorId, null, "TASK_STATUS_UPDATED",
+        auditService.log(actorId,"TASK_STATUS_UPDATED",
                 "Task", taskId, oldStatus, request.getStatus().name(), null);
 
         return toResponse(task);
@@ -168,7 +168,7 @@ public class TaskService {
 
         taskRepository.delete(task);
 
-        auditService.log(actorId, null, "TASK_DELETED",
+        auditService.log(actorId,"TASK_DELETED",
                 "Task", taskId, task.getTitle(), null, null);
     }
 

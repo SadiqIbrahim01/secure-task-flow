@@ -66,7 +66,7 @@ public class AuthService {
         log.info("New user registered: {}", user.getEmail());
 
         auditService.log(
-                user.getId(), user.getEmail(),
+                user.getId(),
                 "USER_REGISTERED", "User", user.getId(),
                 null, user.getEmail(), null
         );
@@ -89,7 +89,7 @@ public class AuthService {
         userRepository.resetLoginAttempts(userDetails.getUserId());
 
         auditService.log(
-                userDetails.getUserId(), userDetails.getEmail(),
+                userDetails.getUserId(),
                 "USER_LOGIN", "User", userDetails.getUserId(),
                 null, null, null
         );

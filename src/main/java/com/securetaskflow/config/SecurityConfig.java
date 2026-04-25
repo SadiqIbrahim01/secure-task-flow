@@ -1,5 +1,7 @@
 package com.securetaskflow.config;
 
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -96,15 +98,23 @@ public class SecurityConfig {
     @Bean
     public AuthenticationEntryPoint authenticationEntryPoint(ObjectMapper objectMapper) {
         return (request, response, authException) -> {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401
-            response.setContentType("application/problem+json");     // RFC 7807
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/problem+json");
             response.setHeader("WWW-Authenticate", "Bearer realm=\"securetaskflow\"");
+
+            String detail;
+            if (authException.getCause() instanceof DisabledException
+                    || authException.getCause() instanceof LockedException) {
+                detail = "Invalid credentials"; // generic — never reveal suspension
+            } else {
+                detail = "Authentication required. Provide a valid Bearer token.";
+            }
 
             var problem = java.util.Map.of(
                     "type",      "https://securetaskflow.com/errors/unauthorized",
                     "title",     "Unauthorized",
                     "status",    401,
-                    "detail",    "Authentication required. Provide a valid Bearer token.",
+                    "detail",    detail,
                     "instance",  request.getRequestURI(),
                     "timestamp", Instant.now().toString()
             );

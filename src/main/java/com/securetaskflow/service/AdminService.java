@@ -65,7 +65,7 @@ public class AdminService {
 
         log.info("Admin {} suspended user {}", actorId, targetUserId);
 
-        auditService.log(actorId, null,
+        auditService.log(actorId,
                 "USER_SUSPENDED", "User", targetUserId,
                 "active", "suspended", null);
 
@@ -89,7 +89,7 @@ public class AdminService {
 
         log.info("Admin {} unsuspended user {}", actorId, targetUserId);
 
-        auditService.log(actorId, null,
+        auditService.log(actorId,
                 "USER_UNSUSPENDED", "User", targetUserId,
                 "suspended", "active", null);
 

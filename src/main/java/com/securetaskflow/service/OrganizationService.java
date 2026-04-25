@@ -56,7 +56,7 @@ public class OrganizationService {
                 .build();
         orgMembershipRepository.save(membership);
 
-        auditService.log(actorId, null,
+        auditService.log(actorId,
                 "ORGANIZATION_CREATED", "Organization", org.getId(),
                 null, org.getName(), null);
 
@@ -115,7 +115,7 @@ public class OrganizationService {
 
         membership = orgMembershipRepository.save(membership);
 
-        auditService.log(actorId, null,
+        auditService.log(actorId,
                 "MEMBER_ADDED", "Organization", orgId,
                 null, newMember.getEmail(), null);
 
@@ -151,7 +151,7 @@ public class OrganizationService {
 
         orgMembershipRepository.delete(targetMembership);
 
-        auditService.log(actorId, null,
+        auditService.log(actorId,
                 "MEMBER_REMOVED", "Organization", orgId,
                 targetUserId.toString(), null, null);
     }
