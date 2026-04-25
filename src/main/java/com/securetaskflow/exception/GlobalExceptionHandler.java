@@ -90,6 +90,13 @@ public class GlobalExceptionHandler {
         return problem;
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ProblemDetail handleIllegalArgument(IllegalArgumentException ex,
+                                               HttpServletRequest request) {
+        return buildProblem(HttpStatus.BAD_REQUEST, "Invalid Request",
+                ex.getMessage(), request.getRequestURI());
+    }
+
     private ProblemDetail buildProblem(HttpStatus status, String title,
                                        String detail, String instance) {
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(status, detail);
