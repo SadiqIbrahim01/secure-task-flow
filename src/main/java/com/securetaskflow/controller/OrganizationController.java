@@ -46,6 +46,13 @@ public class OrganizationController {
         );
     }
 
+    @GetMapping("/my")
+    public ResponseEntity<List<OrganizationResponse>> getMyOrganizations() {
+        return ResponseEntity.ok(
+                organizationService.getMyOrganizations(SecurityUtils.getCurrentUserId())
+        );
+    }
+
     @PostMapping("/{orgId}/members")
     public ResponseEntity<MemberResponse> addMember(
             @PathVariable UUID orgId,

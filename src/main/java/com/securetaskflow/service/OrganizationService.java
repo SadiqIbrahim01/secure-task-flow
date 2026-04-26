@@ -156,6 +156,14 @@ public class OrganizationService {
                 targetUserId.toString(), null, null);
     }
 
+    @Transactional(readOnly = true)
+    public List<OrganizationResponse> getMyOrganizations(UUID userId) {
+        return organizationRepository.findAllByUserId(userId)
+                .stream()
+                .map(this::toResponse)
+                .toList();
+    }
+
     private OrganizationResponse toResponse(Organization org) {
         return OrganizationResponse.builder()
                 .id(org.getId())
