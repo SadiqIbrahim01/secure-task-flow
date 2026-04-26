@@ -295,5 +295,22 @@ MIT License — see `LICENSE` for details.
 
 ---
 
+## Postman Collection
+
+Import both files from the `/postman` directory:
+- `SecureTaskFlow.postman_collection.json` — all API requests
+- `SecureTaskFlow.postman_environment.json` — environment variables
+
+### Quick Start
+1. Import both files into Postman
+2. Select the **SecureTaskFlow Local** environment
+3. Run **Auth → Login (User1)** — token is auto-captured
+4. Run requests in folder order — IDs are auto-captured by test scripts
+
+### Security Test Suite
+The **Security Tests** folder contains 10 pre-built attack scenarios.
+Every test is documented with the attack type and expected response.
+Run the full folder to verify all security controls are working.
+
 *Built as a portfolio project demonstrating production-grade Spring Boot development
 with a strong focus on application security and clean architecture.*

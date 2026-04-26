@@ -1,0 +1,15 @@
+Complete Project Security Summary
+
+Authentication: JWT with 15-minute access tokens and 7-day refresh tokens stored as SHA-256 hashes. Token rotation on every refresh. Immediate revocation on logout and suspension. BCrypt at strength 12 for passwords.
+
+Authorization: Three-tier RBAC — system roles (SUPER_ADMIN, USER), org roles (ORG_OWNER, ORG_MEMBER), and project roles (PROJECT_OWNER, PROJECT_MEMBER, PROJECT_VIEWER). Every role boundary is enforced at the service layer, not just the controller.
+
+IDOR Protection: Every resource lookup is scoped to its parent — tasks are always fetched by id AND projectId, projects by id AND orgId. Membership is verified before any data is returned. Non-members receive 404, not 403.
+
+Input Validation: Bean Validation on all request DTOs. Custom password policy enforced via @Pattern. All database queries are parameterized via JPQL — zero string concatenation.
+
+Audit Trail: Immutable, append-only audit log on every state-changing action. Async with REQUIRES_NEW transaction — audit writes survive main transaction rollbacks.
+
+Security Headers: HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy all configured in the filter chain.
+
+Information Leakage Prevention: RFC 7807 error format with no stack traces. Generic messages for authentication failures. 404 returned for unauthorized resource access to prevent enumeration.
