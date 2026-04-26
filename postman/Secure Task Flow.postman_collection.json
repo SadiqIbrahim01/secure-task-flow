@@ -1,0 +1,1089 @@
+{
+  "info": {
+    "_postman_id": "764b8321-c395-434a-842e-fe21441ebd4f",
+    "name": "Secure Task Flow",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50006468",
+    "_collection_link": "https://go.postman.co/collection/50006468-764b8321-c395-434a-842e-fe21441ebd4f?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "item": [
+        {
+          "name": "Register with weak password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"email\": \"test@example.com\", \"password\": \"weak\", \"firstName\": \"A\", \"lastName\": \"B\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register 1",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"john@example.com\",\r\n  \"password\": \"SecurePass1!\",\r\n  \"firstName\": \"John\",\r\n  \"lastName\": \"Doe\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"email\": \"john@example.com\", \"password\": \"SecurePass1!\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Access protected endpoint with token",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"refreshToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NGM2NDg1Yy1iODE4LTQyYmMtOWVmZC02NzY3MjhlMWYzNmIiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJqdGkiOiI2ZDEzYWE0MS01MDc4LTQ1MTQtOGUwZi1hNTc4OWU3YmMzMDgiLCJpYXQiOjE3NzY5NDAwMDQsImV4cCI6MTc3NzU0NDgwNH0.WzR028PHtHqYTmCXzQ6AzHY3XLkAkOSIrZGcLQzHHUQ\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/auth/refresh",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "refresh"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Register 2",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"bob@example.com\",\r\n  \"password\": \"SecurePass1!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Organization",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0ZDU0MmY4Ni0yODE5LTRhYjktYjAxNy1iYWNmYmQyYTNiZDEiLCJlbWFpbCI6ImJvYkBleGFtcGxlLmNvbSIsImp0aSI6IjljMmI3ZmNkLTA3ZTEtNDQzMy1iYWUzLTJhNjExOTA4ZDQxOCIsImlhdCI6MTc3Njk5MzY1OCwiZXhwIjoxNzc2OTk0NTU4fQ.UfAcPDzDyCrc4AtpAQeIYqfT4TZVDbR8B-14SNcREwQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"name\": \"BobInc\", \"slug\": \"bob-incorporated\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/organizations",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "organizations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "IDOR test",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NGM2NDg1Yy1iODE4LTQyYmMtOWVmZC02NzY3MjhlMWYzNmIiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJqdGkiOiI0NTQ3OWIzOS04NTdjLTQ1ZTEtYjJkNC05NDk1MTNmYWU2MDkiLCJpYXQiOjE3NzY5OTQwMjcsImV4cCI6MTc3Njk5NDkyN30.Y-qv2enBhOuAWTRd7z6Zm0y0pPRjYn1G6UTJOCMmaq8",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NGM2NDg1Yy1iODE4LTQyYmMtOWVmZC02NzY3MjhlMWYzNmIiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJqdGkiOiI0NTQ3OWIzOS04NTdjLTQ1ZTEtYjJkNC05NDk1MTNmYWU2MDkiLCJpYXQiOjE3NzY5OTQwMjcsImV4cCI6MTc3Njk5NDkyN30.Y-qv2enBhOuAWTRd7z6Zm0y0pPRjYn1G6UTJOCMmaq8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"name\": \"BobInc\", \"slug\": \"bob-incorporated\" }"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/organizations/2122a577-3fab-43a7-b233-74d36eee796a",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "2122a577-3fab-43a7-b233-74d36eee796a"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "add member to organzation",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0ZDU0MmY4Ni0yODE5LTRhYjktYjAxNy1iYWNmYmQyYTNiZDEiLCJlbWFpbCI6ImJvYkBleGFtcGxlLmNvbSIsImp0aSI6IjljMmI3ZmNkLTA3ZTEtNDQzMy1iYWUzLTJhNjExOTA4ZDQxOCIsImlhdCI6MTc3Njk5MzY1OCwiZXhwIjoxNzc2OTk0NTU4fQ.UfAcPDzDyCrc4AtpAQeIYqfT4TZVDbR8B-14SNcREwQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0ZDU0MmY4Ni0yODE5LTRhYjktYjAxNy1iYWNmYmQyYTNiZDEiLCJlbWFpbCI6ImJvYkBleGFtcGxlLmNvbSIsImp0aSI6IjljMmI3ZmNkLTA3ZTEtNDQzMy1iYWUzLTJhNjExOTA4ZDQxOCIsImlhdCI6MTc3Njk5MzY1OCwiZXhwIjoxNzc2OTk0NTU4fQ.UfAcPDzDyCrc4AtpAQeIYqfT4TZVDbR8B-14SNcREwQ",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"email\": \"john@example.com\", \"role\": \"ORG_MEMBER\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/organizations/2122a577-3fab-43a7-b233-74d36eee796a/members",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "2122a577-3fab-43a7-b233-74d36eee796a",
+                "members"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user 1 tries to bypass and add member and not being the owner",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NGM2NDg1Yy1iODE4LTQyYmMtOWVmZC02NzY3MjhlMWYzNmIiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJqdGkiOiJjYTFkZDI0ZC1jOWFmLTQzNTQtOTM2My03YzM2Y2E3YjRiNzYiLCJpYXQiOjE3NzY5OTc1MjEsImV4cCI6MTc3Njk5ODQyMX0._BylGLcAXFZGtL7SQeslWefOPo32gEe-hSyygNEQOmA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NGM2NDg1Yy1iODE4LTQyYmMtOWVmZC02NzY3MjhlMWYzNmIiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJqdGkiOiJjYTFkZDI0ZC1jOWFmLTQzNTQtOTM2My03YzM2Y2E3YjRiNzYiLCJpYXQiOjE3NzY5OTc1MjEsImV4cCI6MTc3Njk5ODQyMX0._BylGLcAXFZGtL7SQeslWefOPo32gEe-hSyygNEQOmA",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"email\": \"anyone@example.com\", \"role\": \"ORG_MEMBER\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/organizations/2122a577-3fab-43a7-b233-74d36eee796a/members",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "2122a577-3fab-43a7-b233-74d36eee796a",
+                "members"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "add member with wrong token",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0ZDU0MmY4Ni0yODE5LTRhYjktYjAxNy1iYWNmYmQyYTNiZDEiLCJlbWFpbCI6ImJvYkBleGFtcGxlLmNvbSIsImp0aSI6IjhjNzZjMzk3LThiYTEtNGMwYi1hNGI0LTc2NjM0NzE4OTkzZiIsImlhdCI6MTc3NzAwMjc2MSwiZXhwIjoxNzc3MDAzNjYxfQ.2Of_nEfHcgxBMCuogZkyqAXOLpr3TNizIzc9jPOuJV8",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0ZDU0MmY4Ni0yODE5LTRhYjktYjAxNy1iYWNmYmQyYTNiZDEiLCJlbWFpbCI6ImJvYkBleGFtcGxlLmNvbSIsImp0aSI6IjhjNzZjMzk3LThiYTEtNGMwYi1hNGI0LTc2NjM0NzE4OTkzZiIsImlhdCI6MTc3NzAwMjc2MSwiZXhwIjoxNzc3MDAzNjYxfQ.2Of_nEfHcgxBMCuogZkyqAXOLpr3TNizIzc9jPOuJV8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"bob@example.com\",\r\n  \"password\": \"SecurePass1!\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/organizations/2122a577-3fab-43a7-b233-74d36eee796a/members/7ad4f17a-7882-4458-9a0b-fc2d8ce41bfb",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "2122a577-3fab-43a7-b233-74d36eee796a",
+                "members",
+                "7ad4f17a-7882-4458-9a0b-fc2d8ce41bfb"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get organization members",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0ZDU0MmY4Ni0yODE5LTRhYjktYjAxNy1iYWNmYmQyYTNiZDEiLCJlbWFpbCI6ImJvYkBleGFtcGxlLmNvbSIsImp0aSI6ImZjOGU2MTU4LTVkY2UtNDBiYS1iOGRkLThjNTBmMzk1Mjg4MCIsImlhdCI6MTc3NzAxMTkxMywiZXhwIjoxNzc3MDEyODEzfQ.xMohlkOsSxOcPY3N6xd2eLbRfP9DjnPwMjmyzh8F9J0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"bob@example.com\",\r\n  \"password\": \"SecurePass1!\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/organizations/2122a577-3fab-43a7-b233-74d36eee796a/members",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "2122a577-3fab-43a7-b233-74d36eee796a",
+                "members"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "register user2",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"user2@example.com\",\r\n  \"password\": \"SecurePass1!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "add user2 to organization",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "create organization for john as user1",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NGM2NDg1Yy1iODE4LTQyYmMtOWVmZC02NzY3MjhlMWYzNmIiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJqdGkiOiI1OTFjOTA4Yi1kOTBiLTRlMTctOTc1YS01NTg0NmMwNWJjMzYiLCJpYXQiOjE3NzcwMTEwMzMsImV4cCI6MTc3NzAxMTkzM30.2k7JOaVfDZpvv9JWfbYj9xWL-Fi9ctVBoQ9fIGa1zmA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"John Corp\",\r\n    \"slug\": \"john-corp\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/organizations",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "organizations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register Mike as user 2",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"mike@example.com\",\r\n  \"password\": \"SecurePass1!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "IDOR Test",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYTc3YjMxZi02MDRjLTQ5N2QtYTRiMC03YTk0ZDBmOTMzMWIiLCJlbWFpbCI6Im1pa2VAZXhhbXBsZS5jb20iLCJqdGkiOiJjOWE5M2NlMy1iMTJmLTQyNTQtYmY2Ny03YjE1ODllYjdiZmIiLCJpYXQiOjE3NzcwMTEyMzcsImV4cCI6MTc3NzAxMjEzN30.Nbw2t0HbRIcp1gl3SxvrJgs7E_Ovc7UDIOgSfqnS73E",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/organizations/f7541a85-d9aa-4ade-927d-3113bee59377",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "f7541a85-d9aa-4ade-927d-3113bee59377"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add user 2 as ORG_MEMBER",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0ZDU0MmY4Ni0yODE5LTRhYjktYjAxNy1iYWNmYmQyYTNiZDEiLCJlbWFpbCI6ImJvYkBleGFtcGxlLmNvbSIsImp0aSI6ImFlZjc3M2RlLWFlODItNDdjZS05ODdmLWFlY2UwNjIxNDBjMCIsImlhdCI6MTc3NzAxMTYwMSwiZXhwIjoxNzc3MDEyNTAxfQ.u17iXAVbfKu5eIPfdPgaCVwd_qsQq_0shO5khcgPQus",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"mike@example.com\",\r\n    \"role\":   \"ORG_MEMBER\" \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/organizations/2122a577-3fab-43a7-b233-74d36eee796a/members",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "2122a577-3fab-43a7-b233-74d36eee796a",
+                "members"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "RBAC test",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYTc3YjMxZi02MDRjLTQ5N2QtYTRiMC03YTk0ZDBmOTMzMWIiLCJlbWFpbCI6Im1pa2VAZXhhbXBsZS5jb20iLCJqdGkiOiJjOWE5M2NlMy1iMTJmLTQyNTQtYmY2Ny03YjE1ODllYjdiZmIiLCJpYXQiOjE3NzcwMTEyMzcsImV4cCI6MTc3NzAxMjEzN30.Nbw2t0HbRIcp1gl3SxvrJgs7E_Ovc7UDIOgSfqnS73E",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"anyone@example.com\",\r\n    \"role\": \"ORG_MEMBER\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/organizations/2122a577-3fab-43a7-b233-74d36eee796a/members",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "2122a577-3fab-43a7-b233-74d36eee796a",
+                "members"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Project",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0ZDU0MmY4Ni0yODE5LTRhYjktYjAxNy1iYWNmYmQyYTNiZDEiLCJlbWFpbCI6ImJvYkBleGFtcGxlLmNvbSIsImp0aSI6IjU5YzFiNTc3LTNiOGItNDlmYS05MGRiLTUxZmRmNWI2ZDM0OSIsImlhdCI6MTc3NzAzNjEzNCwiZXhwIjoxNzc3MDM3MDM0fQ.GLM1TW9SgBPa9OzbLm0faYf82a18-rsyZ5lL1naZTP0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"name\": \"Alpha Project\", \"description\": \"Our first project\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/organizations/2122a577-3fab-43a7-b233-74d36eee796a/projects",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "2122a577-3fab-43a7-b233-74d36eee796a",
+                "projects"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "try to view project(IDOR test)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NGM2NDg1Yy1iODE4LTQyYmMtOWVmZC02NzY3MjhlMWYzNmIiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJqdGkiOiJlNTczYTJkZi02ZmRlLTRhNzEtYmIyNS02ODBiMTVhYjY5ZjYiLCJpYXQiOjE3NzcwMzYyNjEsImV4cCI6MTc3NzAzNzE2MX0.dQMgw7wUXxF6GKLsiGp0X8Qa-jtzi41p8VugycuMSHA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/organizations/2122a577-3fab-43a7-b233-74d36eee796a/projects/ba6c0f49-c24c-4726-854a-e7ac644136a1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "2122a577-3fab-43a7-b233-74d36eee796a",
+                "projects",
+                "ba6c0f49-c24c-4726-854a-e7ac644136a1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "add someone as project member",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0ZDU0MmY4Ni0yODE5LTRhYjktYjAxNy1iYWNmYmQyYTNiZDEiLCJlbWFpbCI6ImJvYkBleGFtcGxlLmNvbSIsImp0aSI6IjU5YzFiNTc3LTNiOGItNDlmYS05MGRiLTUxZmRmNWI2ZDM0OSIsImlhdCI6MTc3NzAzNjEzNCwiZXhwIjoxNzc3MDM3MDM0fQ.GLM1TW9SgBPa9OzbLm0faYf82a18-rsyZ5lL1naZTP0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"email\": \"john@example.com\", \"role\": \"PROJECT_MEMBER\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/organizations/2122a577-3fab-43a7-b233-74d36eee796a/projects/ba6c0f49-c24c-4726-854a-e7ac644136a1/members",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "2122a577-3fab-43a7-b233-74d36eee796a",
+                "projects",
+                "ba6c0f49-c24c-4726-854a-e7ac644136a1",
+                "members"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create task as member",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NGM2NDg1Yy1iODE4LTQyYmMtOWVmZC02NzY3MjhlMWYzNmIiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJqdGkiOiJlNTczYTJkZi02ZmRlLTRhNzEtYmIyNS02ODBiMTVhYjY5ZjYiLCJpYXQiOjE3NzcwMzYyNjEsImV4cCI6MTc3NzAzNzE2MX0.dQMgw7wUXxF6GKLsiGp0X8Qa-jtzi41p8VugycuMSHA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Build login page\",\r\n    \"description\": \"Implement the login UI\",\r\n    \"priority\": \"HIGH\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/projects/ba6c0f49-c24c-4726-854a-e7ac644136a1/tasks",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "projects",
+                "ba6c0f49-c24c-4726-854a-e7ac644136a1",
+                "tasks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "member lists tasks",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NGM2NDg1Yy1iODE4LTQyYmMtOWVmZC02NzY3MjhlMWYzNmIiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJqdGkiOiJlNTczYTJkZi02ZmRlLTRhNzEtYmIyNS02ODBiMTVhYjY5ZjYiLCJpYXQiOjE3NzcwMzYyNjEsImV4cCI6MTc3NzAzNzE2MX0.dQMgw7wUXxF6GKLsiGp0X8Qa-jtzi41p8VugycuMSHA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/projects/ba6c0f49-c24c-4726-854a-e7ac644136a1/tasks",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "projects",
+                "ba6c0f49-c24c-4726-854a-e7ac644136a1",
+                "tasks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "member tries to delete task",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "update task status",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NGM2NDg1Yy1iODE4LTQyYmMtOWVmZC02NzY3MjhlMWYzNmIiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJqdGkiOiJlNTczYTJkZi02ZmRlLTRhNzEtYmIyNS02ODBiMTVhYjY5ZjYiLCJpYXQiOjE3NzcwMzYyNjEsImV4cCI6MTc3NzAzNzE2MX0.dQMgw7wUXxF6GKLsiGp0X8Qa-jtzi41p8VugycuMSHA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"status\": \"IN_PROGRESS\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/v1/projects/ba6c0f49-c24c-4726-854a-e7ac644136a1/tasks/a9ac4442-6d1a-4172-967f-9ef486a89372/status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "projects",
+                "ba6c0f49-c24c-4726-854a-e7ac644136a1",
+                "tasks",
+                "a9ac4442-6d1a-4172-967f-9ef486a89372",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List all users(Super admin only)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NGM2NDg1Yy1iODE4LTQyYmMtOWVmZC02NzY3MjhlMWYzNmIiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJqdGkiOiJkMDA3YWY1Ny03NjY5LTRkODMtYWI5Zi0zNzEyMTdkOGEwMWIiLCJpYXQiOjE3NzcxNDcxMTQsImV4cCI6MTc3NzE0ODAxNH0.M5TKLqe4pFnsSwT3Cv6nRdOIO9oP0v0e9KE8BgWGozw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/admin/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user tries to access admin endpoint",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0ZDU0MmY4Ni0yODE5LTRhYjktYjAxNy1iYWNmYmQyYTNiZDEiLCJlbWFpbCI6ImJvYkBleGFtcGxlLmNvbSIsImp0aSI6IjFmNTY2NWU1LTg5MGEtNGMzOS05ZjcwLWRkYzc1ZTIzMDc4MyIsImlhdCI6MTc3NzE0NzMzMywiZXhwIjoxNzc3MTQ4MjMzfQ.w1mo0LQVtV4Qhs9GH12yomaRZF6yUuVBRDLgaEkEkRU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/admin/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Suspend user 2",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NGM2NDg1Yy1iODE4LTQyYmMtOWVmZC02NzY3MjhlMWYzNmIiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJqdGkiOiIwYmUyNmQ5Ny1jNGVjLTRmOGItYTVkYi1hOWQwMzBkMWNlZDIiLCJpYXQiOjE3NzcxNDg1NTcsImV4cCI6MTc3NzE0OTQ1N30.KylngBa87tXpS-CuUrQG76AGJ325WOYrA1hDc9_ujAA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/admin/users/4d542f86-2819-4ab9-b017-bacfbd2a3bd1/suspend",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "users",
+                "4d542f86-2819-4ab9-b017-bacfbd2a3bd1",
+                "suspend"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "suspended bob tries to login",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "unsuspend user",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NGM2NDg1Yy1iODE4LTQyYmMtOWVmZC02NzY3MjhlMWYzNmIiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJqdGkiOiJkMDA3YWY1Ny03NjY5LTRkODMtYWI5Zi0zNzEyMTdkOGEwMWIiLCJpYXQiOjE3NzcxNDcxMTQsImV4cCI6MTc3NzE0ODAxNH0.M5TKLqe4pFnsSwT3Cv6nRdOIO9oP0v0e9KE8BgWGozw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/v1/admin/users/4d542f86-2819-4ab9-b017-bacfbd2a3bd1/unsuspend",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "users",
+                "4d542f86-2819-4ab9-b017-bacfbd2a3bd1",
+                "unsuspend"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "view audit logs",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
