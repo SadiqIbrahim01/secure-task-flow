@@ -157,6 +157,25 @@ public class ProjectService {
                 "Project", projectId, project.getName(), null, null);
     }
 
+    @Transactional(readOnly = true)
+    public List<MemberResponse> getProjectMembers(UUID orgId, UUID projectId, UUID actorId) {
+        projectMembershipRepository
+                .findByUserIdAndProjectId(actorId, projectId)
+                .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
+
+        return projectMembershipRepository.findAllByProjectId(projectId)
+                .stream()
+                .map(pm -> MemberResponse.builder()
+                        .userId(pm.getUser().getId())
+                        .email(pm.getUser().getEmail())
+                        .firstName(pm.getUser().getFirstName())
+                        .lastName(pm.getUser().getLastName())
+                        .role(pm.getRole().name())
+                        .joinedAt(pm.getCreatedAt())
+                        .build())
+                .toList();
+    }
+
     private ProjectResponse toResponse(Project p) {
         return ProjectResponse.builder()
                 .id(p.getId())

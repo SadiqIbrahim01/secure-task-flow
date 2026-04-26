@@ -47,6 +47,15 @@ public class ProjectController {
         );
     }
 
+    @GetMapping("/{projectId}/members")
+    public ResponseEntity<List<MemberResponse>> getProjectMembers(
+            @PathVariable UUID orgId,
+            @PathVariable UUID projectId) {
+        return ResponseEntity.ok(
+                projectService.getProjectMembers(orgId, projectId, SecurityUtils.getCurrentUserId())
+        );
+    }
+
     @PostMapping("/{projectId}/members")
     public ResponseEntity<MemberResponse> addMember(
             @PathVariable UUID orgId,
