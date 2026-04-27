@@ -17,3 +17,6 @@ export const updateTaskStatus = (projectId, taskId, status) =>
 
 export const deleteTask = (projectId, taskId) =>
   api.delete(`/projects/${projectId}/tasks/${taskId}`);
+
+export const getProjectMembers = (projectId) =>
+  api.get(`/projects/${projectId}/members`);
