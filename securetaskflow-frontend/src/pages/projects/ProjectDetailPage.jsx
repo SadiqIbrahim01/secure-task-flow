@@ -271,7 +271,10 @@ export default function ProjectDetailPage() {
         {/* Task Board button */}
         <Button
           variant="secondary"
-          onClick={() => navigate(`/projects/${projectId}/board`)}
+          onClick={() => {
+          sessionStorage.setItem(`project-org-${projectId}`, orgId);
+          navigate(`/projects/${projectId}/board`);
+        }}
         >
           <Kanban className="h-4 w-4" />
           Task Board
